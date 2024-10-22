@@ -1,0 +1,1 @@
+# PracticaJhipster
