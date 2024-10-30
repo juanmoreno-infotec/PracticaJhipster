@@ -22,3 +22,4 @@ https://start.jhipster.tech/jdl-studio/
 https://www.figma.com/
 https://help.bizagi.com/platform/es/index.html?best_practices_in_modeling.htm
 https://trello.com
+https://fakestoreapi.com/docs
