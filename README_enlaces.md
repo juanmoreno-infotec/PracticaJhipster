@@ -25,3 +25,6 @@ https://trello.com
 https://fakestoreapi.com/docs
 https://asana.com/es/resources/planning-poker
 https://es.vuejs.org/v2/guide/computed
+https://bootswatch.com/
+https://www.ionos.mx/digitalguide/paginas-web/desarrollo-web/jhipster/
+https://www.youtube.com/watch?v=rXHZKGPz_o8&ab_channel=MagnoEdwinCalizaya
