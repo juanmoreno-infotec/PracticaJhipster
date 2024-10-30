@@ -24,3 +24,4 @@ https://help.bizagi.com/platform/es/index.html?best_practices_in_modeling.htm
 https://trello.com
 https://fakestoreapi.com/docs
 https://asana.com/es/resources/planning-poker
+https://es.vuejs.org/v2/guide/computed
