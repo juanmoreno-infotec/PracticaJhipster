@@ -88,6 +88,13 @@ export default defineComponent({
       this.tareaToEdit.fechaLimite = tarea.fechaLimite;
     },
     createTareaHandler(): void {
+//      if (this.listaTareas) {
+//        this.tareaToEdit.id = this.keygenerator();
+//        this.listaTareas.push(this.tareaToEdit);
+//        this.tareaToEdit = new Tarea();
+//      }
+//      this.createTareaModal.hide(); 
+      // Se cambia para la ejecución de fetching para la tarea
       this.isFetching = true;
       this.tareaService()
         .crear(this.tareaToEdit)
@@ -103,19 +110,47 @@ export default defineComponent({
       this.createTareaModal.hide();
     },
     deleteTareaHandler(): void {
-      if (this.listaTareas) {
-        const index = this.listaTareas.findIndex(tarea => tarea.id === this.tareaToEdit.id);
-        this.listaTareas.splice(index, 1);
-        this.deleteTareaModal.hide();
-      }
+//      if (this.listaTareas) {
+//        const index = this.listaTareas.findIndex(tarea => tarea.id === this.tareaToEdit.id);
+//        this.listaTareas.splice(index, 1);
+//        this.deleteTareaModal.hide();
+//      }
+      this.isFetching = true;
+      this.tareaService()
+        .borrar(this.tareaToEdit)
+        .then(tarea => {
+          this.listarTareas();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.isFetching = false;
+        });
+      this.deleteTareaModal.hide();
     },
+
     updateTareaHandler(): void {
-      if (this.listaTareas) {
-        const index = this.listaTareas.findIndex(tarea => tarea.id === this.tareaToEdit.id);
-        this.listaTareas.splice(index, 1, this.tareaToEdit);
-        this.editTareaModal.hide();
-      }
+//      if (this.listaTareas) {
+//        const index = this.listaTareas.findIndex(tarea => tarea.id === this.tareaToEdit.id);
+//        this.listaTareas.splice(index, 1, this.tareaToEdit);
+//        this.editTareaModal.hide();
+//      }
+      this.isFetching = true;
+      this.tareaService()
+        .actualizar(this.tareaToEdit)
+        .then(tarea => {
+          this.listarTareas();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.isFetching = false;
+        });
+      this.editTareaModal.hide();
     },
+
     cancelHandler(): void {
       this.createTareaModal.hide();
       this.deleteTareaModal.hide();

@@ -30,4 +30,30 @@ export default class TareaService {
         });
     });
   }
+
+  public borrar(tarea: ITarea): Promise<ITarea> {
+    return new Promise<ITarea>((resolve, reject) => {
+      axios
+        .delete(`${baseApiUrl}/${tarea.id}`)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public actualizar(tarea: ITarea): Promise<ITarea> {
+    return new Promise<ITarea>((resolve, reject) => {
+      axios
+        .put(`${baseApiUrl}/${tarea.id}`, tarea)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 }
