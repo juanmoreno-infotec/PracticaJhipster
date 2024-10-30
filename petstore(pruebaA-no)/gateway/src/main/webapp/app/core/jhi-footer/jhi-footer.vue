@@ -4,7 +4,7 @@
   </div>
 
   <!-- EXAMPLE FOR USE BUTTON IN FOOTER-->
-  <daic-calculator>
+  <daic-calculator variant="outline-primary float-right">
 
   </daic-calculator>
 </template>
