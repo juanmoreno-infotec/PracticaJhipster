@@ -1,4 +1,4 @@
-### Gestor de tareas (Parte 2 - Componentes)
+# Gestor de tareas (Parte 2 - Componentes)
 
 El objectivo de esta práctica es crear un componente reutilizable que permita registrar, editar y visualizar una tarea.
 

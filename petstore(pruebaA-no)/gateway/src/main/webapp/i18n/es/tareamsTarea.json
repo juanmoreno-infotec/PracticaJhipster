@@ -1,0 +1,30 @@
+{
+  "gatewayApp": {
+    "tareamsTarea": {
+      "home": {
+        "title": "Tareas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Tarea",
+        "createOrEditLabel": "Crear o editar Tarea",
+        "notFound": "Ningún Tareas encontrado"
+      },
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Tarea { id }?"
+      },
+      "detail": {
+        "title": "Tarea"
+      },
+      "id": "ID",
+      "nombre": "Nombre",
+      "descripcion": "Descripcion",
+      "fechaLimite": "Fecha Limite"
+    }
+  },
+  "tareamsApp": {
+    "tareamsTarea": {
+      "created": "Un nuevo Tarea ha sido creado con el identificador { param }",
+      "updated": "Un Tarea ha sido actualizado con el identificador { param }",
+      "deleted": "Un Tarea ha sido eliminado con el identificador { param }"
+    }
+  }
+}

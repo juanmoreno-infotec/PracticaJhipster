@@ -12,7 +12,6 @@ const AlimentoUpdate = () => import('@/entities/alimentoms/alimento/alimento-upd
 const AlimentoDetails = () => import('@/entities/alimentoms/alimento/alimento-details.vue');
 
 const Tareas = () => import ('@/pages/tareas/tareas.vue');
-const Calculator = () => import ('@/pages/tareas/calculator.vue');
 
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
@@ -24,12 +23,6 @@ export default {
       path: 'tareas',
       name: 'Tareas',
       component: Tareas,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'calculator',
-      name: 'Calculator',
-      component: Calculator,
       meta: { authorities: [Authority.USER] },
     },
     {

@@ -1,5 +1,5 @@
-### Gestor de tareas
-P
+# Gestor de tareas
+
 El objectivo de esta práctica es crear un gestor de tareas que permita realizar las siguientes funcionalidades:
 
 1. Mostrar las lista de tareas registradas

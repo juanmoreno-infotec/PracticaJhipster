@@ -15,7 +15,7 @@
 
 mongock:
   migration-scan-package:
-    - mx.infotec.tareams.config.dbmigrations
+    - mx.infotec.config.dbmigrations
   mongo-db:
     read-concern: local
     write-concern:
@@ -89,7 +89,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: MzM0NzMzNDQ0MmVjYTI2MmY4ZWNjYTJmODUwNzhkZTAxMjkzODE5ODA5NmYzY2Q5NTg5ZjgyZmI0YzQyOWJmZTMzZDhiZjk5MTYyNmYyZTNlMjc3MWRmODZlNDkwYzNmY2RhM2VkMDdkZjg4YWE3YjlmMTE2NzI1ZTNhNjBlNGQ=
+        base64-secret: YmZmOWNmMGJlZWNiYzg2MzVmMGI1MjE0NWEyMDczZjk5ZTJlMzIzYzcxMzZiYmQyZWFjZmEwMmM0N2MyNmNlNmYyMmRjNDc0YmJmMzI0OGM5ZDQ5MTEwZmM1NWY0NDM5OTZjYTI0NmRlNjY2OGFiNTU1NGQwZThhMjM3YzBlOTE=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 86400

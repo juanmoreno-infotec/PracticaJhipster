@@ -24,11 +24,9 @@ springdoc:
   api-docs:
     enabled: false
 ---
-reactive:
-  feign:
-    circuit:
-      breaker:
-        enabled: true
+feign:
+  circuitbreaker:
+    enabled: true
   # client:
   #   config:
   #     default:
@@ -100,7 +98,7 @@ management:
 
 mongock:
   migration-scan-package:
-    - mx.infotec.tareams.config.dbmigrations
+    - mx.infotec.config.dbmigrations
 
 spring:
   application:
@@ -114,11 +112,6 @@ spring:
       config:
         watch:
           enabled: false
-  docker:
-    compose:
-      enabled: true
-      lifecycle-management: start-only
-      file: src/main/docker/mongodb.yml
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -136,7 +129,7 @@ spring:
     basename: i18n/messages
   main:
     allow-bean-definition-overriding: true
-  webflux:
+  mvc:
     problemdetails:
       enabled: true
   security:

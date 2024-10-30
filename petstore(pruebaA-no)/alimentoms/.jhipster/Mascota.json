@@ -1,0 +1,15 @@
+{
+  "annotations": {
+    "changelogDate": "20241029193603"
+  },
+  "clientRootFolder": "alimentoms",
+  "databaseType": "mongodb",
+  "fields": [],
+  "microserviceName": "alimentoms",
+  "name": "Mascota",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "no"
+}

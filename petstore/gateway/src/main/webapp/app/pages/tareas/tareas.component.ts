@@ -1,22 +1,56 @@
 import { Tarea } from '@/shared/model/tarea.model';
-import { defineComponent, ref, type Ref } from 'vue';
+import { defineComponent, ref, type Ref, inject, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useTareaStore } from '@/store';
+import TareaEdit from '@/components/tarea-edit/tarea-edit.vue';
+import TareaService from '@/pages/tareas/tareas.service';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   emits: ['confirmed'],
+  components: {
+    'tarea-edit': TareaEdit,
+  },
   name: 'Tareas',
   setup() {
+    const tareaService = inject('tareaService', () => new TareaService());
+
     const textLabel: Ref<string> = ref('Hola mundo');
     const tareaStore = useTareaStore();
-    const listaTareas: Ref<Tarea[] | null> = ref(tareaStore.listaDeTareas);
+    const listaTareas: Ref<Tarea[] | null> = ref([]);
     const tareaToEdit: Ref<Tarea> = ref(new Tarea());
     const fields: Ref<string[]> = ref(['id', 'nombre', 'fechaLimite', 'acciones']);
 
     const createTareaModal = ref<any>(null);
     const deleteTareaModal = ref<any>(null);
     const editTareaModal = ref<any>(null);
+    const isFetching: Ref<boolean> = ref(false);
+
+    const listarTareas = () => {
+      isFetching.value = true;
+      tareaService()
+        .listar()
+        .then(res => {
+          listaTareas.value = res.data;
+          if (listaTareas.value) {
+            listaTareas.value?.forEach(tarea => {
+              if (tarea.fechaLimite) {
+                tarea.fechaLimite = new Date(tarea.fechaLimite);
+              }
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          isFetching.value = false;
+        });
+    };
+
+    onMounted(() => {
+      listarTareas();
+    });
 
     return {
       textLabel,
@@ -27,7 +61,10 @@ export default defineComponent({
       tareaToEdit,
       tareaStore,
       fields,
+      isFetching,
       t$: useI18n().t,
+      tareaService,
+      listarTareas,
     };
   },
   methods: {
@@ -39,20 +76,30 @@ export default defineComponent({
       console.log('Se ejecuto un click');
     },
     openEditModalHandler(tarea: any): void {
-      this.tareaToEdit = JSON.parse(JSON.stringify(tarea));
-      this.tareaToEdit.fechaLimite = tarea.fechaLimite;
+      this.createEditableTarea(tarea);
       this.editTareaModal.show();
     },
     openDeleteModalHandler(tarea: Tarea): void {
-      this.tareaToEdit = JSON.parse(JSON.stringify(tarea));
+      this.createEditableTarea(tarea);
       this.deleteTareaModal.show();
     },
+    createEditableTarea(tarea: Tarea): void {
+      this.tareaToEdit = JSON.parse(JSON.stringify(tarea));
+      this.tareaToEdit.fechaLimite = tarea.fechaLimite;
+    },
     createTareaHandler(): void {
-      if (this.listaTareas) {
-        this.tareaToEdit.id = this.keygenerator();
-        this.listaTareas.push(this.tareaToEdit);
-        this.tareaToEdit = new Tarea();
-      }
+      this.isFetching = true;
+      this.tareaService()
+        .crear(this.tareaToEdit)
+        .then(tarea => {
+          this.listarTareas();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.isFetching = false;
+        });
       this.createTareaModal.hide();
     },
     deleteTareaHandler(): void {
@@ -76,34 +123,6 @@ export default defineComponent({
     },
     keygenerator(): string {
       return new Date().getTime().toString();
-    },
-    isNombreValid(): boolean {
-      if (this.tareaToEdit?.nombre?.length) {
-        return this.tareaToEdit.nombre.length >= 3 && this.tareaToEdit.nombre.length <= 50;
-      }
-      return false;
-    },
-    isDescripcionValid(): boolean {
-      if (this.tareaToEdit?.descripcion?.length) {
-        return this.tareaToEdit.descripcion.length >= 3 && this.tareaToEdit.descripcion.length <= 100;
-      }
-      return false;
-    },
-    isDateValid(): boolean {
-      if (this.tareaToEdit?.fechaLimite) {
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const current = new Date(
-          this.tareaToEdit.fechaLimite.getFullYear(),
-          this.tareaToEdit.fechaLimite.getMonth(),
-          this.tareaToEdit.fechaLimite.getDate(),
-        );
-        return current >= today;
-      }
-      return false;
-    },
-    isFormValid(): boolean {
-      return this.isNombreValid() && this.isDescripcionValid() && this.isDateValid();
     },
   },
 });

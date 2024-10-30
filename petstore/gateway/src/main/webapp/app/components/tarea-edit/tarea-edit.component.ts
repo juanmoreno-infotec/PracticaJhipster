@@ -1,57 +1,59 @@
-/*import { Component, Vue } from 'vue';
-import { Tarea } from '@/shared/model/tarea.model';
-import { defineComponent, ref, type Ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useTareaStore } from '@/store';
+import type { ITarea } from '@/shared/model/tarea.model';
+import { computed, defineComponent, type PropType } from 'vue';
 
 export default defineComponent({
   compatConfig: { MODE: 3, COMPONENT_V_MODEL: false },
   name: 'TareaEdit',
   props: {
-    tarea: {
-      type: Tarea,
-      required: true
+    modelValue: {
+      type: Object as PropType<ITarea>,
+      required: true,
     },
     readonly: {
       type: Boolean,
-      default: false
-    }
-  },
-//  methods: {
-//    get tareaToEdit() {
-//        return this.readonly ? { ...this.tarea } : this.tarea;
-//    },
-  data() {
-    return {
-      // Copia local de la tarea para realizar los cambios
-      localTarea: {}
-    }
-  },
-  watch: {
-    tarea: {
-      deep: true,
-      handler(newValue) {
-        this.localTarea = JSON.parse(JSON.stringify(newValue));
-      }
-    }
-  },
-  computed: {
-    tareaToEdit() {
-      return this.localTarea;
+      default: false,
     },
-    isFormValid() {
-      // Lógica de validación de los campos
-//      return this.tareaToEdit.nombre && this.tareaToEdit.nombrie.length >= 3;
-//      return this.tareaToEdit.nombre && this.tareaToEdit.nombre.lenghth >= 3;
-    }
+  },
+  setup(props, { emit }) {
+    const tarea = computed({
+      get: () => props.modelValue,
+      set: value => emit('update:modelValue', value),
+    });
+    return {
+      tarea,
+      emit,
+    };
   },
   methods: {
-    updateTareaHandler() {
-      this.$emit('update:tarea', this.tareaToEdit);
+    isNombreValid(): boolean {
+      if (this.tarea?.nombre?.length) {
+        return this.tarea.nombre.length >= 3 && this.tarea.nombre.length <= 50;
+      }
+      return false;
     },
-    cancelHandler() {
-      this.$emit('cancel:tarea');
-    }
-  }
+    isDescripcionValid(): boolean {
+      if (this.tarea?.descripcion?.length) {
+        return this.tarea.descripcion.length >= 3 && this.tarea.descripcion.length <= 100;
+      }
+      return false;
+    },
+    isDateValid(): boolean {
+      if (this.tarea?.fechaLimite) {
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const current = new Date(this.tarea.fechaLimite.getFullYear(), this.tarea.fechaLimite.getMonth(), this.tarea.fechaLimite.getDate());
+        return current >= today;
+      }
+      return false;
+    },
+    isFormValid(): boolean {
+      return this.isNombreValid() && this.isDescripcionValid() && this.isDateValid();
+    },
+    cancelHandler(): void {
+      this.emit('cancel');
+    },
+    saveHandler(): void {
+      this.emit('confirmed');
+    },
+  },
 });
-*/

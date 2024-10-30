@@ -9,13 +9,13 @@ services:
       - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
       - SPRING_CLOUD_CONSUL_HOST=consul
       - SPRING_CLOUD_CONSUL_PORT=8500
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/tareams?waitQueueMultiple=1000
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/tareams
     healthcheck:
       test:
         - CMD
         - curl
         - -f
-        - http://localhost:8083/management/health
+        - http://localhost:8081/management/health
       interval: 5s
       timeout: 5s
       retries: 40

@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    mx.infotec.tareams: INFO
+    mx.infotec: INFO
 
 management:
   prometheus:
@@ -45,7 +45,7 @@ spring:
       port: 8500
   data:
     mongodb:
-      uri: mongodb://localhost:27017/tareams?waitQueueMultiple=1000
+      uri: mongodb://localhost:27017/tareams
   thymeleaf:
     cache: true
 
@@ -69,7 +69,7 @@ spring:
 #     ciphers: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
 # ===================================================================
 server:
-  port: 8083
+  port: 8081
   shutdown: graceful # see https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-graceful-shutdown
   compression:
     enabled: true
@@ -94,7 +94,7 @@ jhipster:
         # - In the Consul configserver
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: MzM0NzMzNDQ0MmVjYTI2MmY4ZWNjYTJmODUwNzhkZTAxMjkzODE5ODA5NmYzY2Q5NTg5ZjgyZmI0YzQyOWJmZTMzZDhiZjk5MTYyNmYyZTNlMjc3MWRmODZlNDkwYzNmY2RhM2VkMDdkZjg4YWE3YjlmMTE2NzI1ZTNhNjBlNGQ=
+        base64-secret: YmZmOWNmMGJlZWNiYzg2MzVmMGI1MjE0NWEyMDczZjk5ZTJlMzIzYzcxMzZiYmQyZWFjZmEwMmM0N2MyNmNlNmYyMmRjNDc0YmJmMzI0OGM5ZDQ5MTEwZmM1NWY0NDM5OTZjYTI0NmRlNjY2OGFiNTU1NGQwZThhMjM3YzBlOTE=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
